@@ -1,26 +1,47 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* ベースカラー */
+  --background: #050505;       /* ほぼ黒 */
+  --foreground: #ffffff;       /* 白 */
+  
+  /* テキストカラー */
+  --text-main: #f3f4f6;        /* メインの文字色 (真っ白より目に優しい) */
+  --text-muted: #9ca3af;       /* 控えめな文字色 (グレー) */
+  
+  /* アクセントカラー (強調色) */
+  --primary: #3b82f6;          /* 強調1: 鮮やかな青 (リンクや重要なボタン) */
+  --secondary: #8b5cf6;        /* 強調2: 紫 (グラデーション用など) */
+  
+  /* UIパーツ */
+  --header-bg: rgba(5, 5, 5, 0.8); /* ヘッダー背景 (少し透過) */
+  --footer-bg: #000000;            /* フッター背景 */
+  --border-color: #27272a;         /* 枠線の色 */
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 10, 10;
+  --background-end-rgb: 100, 100, 100;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */

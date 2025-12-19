@@ -1,0 +1,65 @@
+{/*
+---
+title: "Hello WebGL World"
+date: "2024-01-01"
+category: "Graphics"
+tags: ["WebGL", "Three.js"]
+description: "MDXを使った最初のテスト投稿です。Markdownの中にReactコンポーネント（3Dシーン）を埋め込んで表示するテストを行っています。"
+---
+*/}
+
+import PageLayout from '@/components/layout/PageLayout'
+import Scene from '@/components/canvas/Scene'
+import Box from '@/components/canvas/Box'
+
+<PageLayout title="Hello WebGL World" description="MDXを使った最初のテスト投稿です">
+
+## MDXのパワーを体験する
+
+これは普通のMarkdownテキストです。箇条書きも簡単に書けます。
+
+- Next.js
+- React Three Fiber
+- MDX
+
+そして、ここからが本番。記事の中に**3Dシーンを直接埋め込みます**。
+
+<div className="w-full h-[400px] my-8 rounded-xl overflow-hidden border border-border bg-black/50 relative">
+  <Scene>
+    <Box position={[0, 0, 0]} />
+  </Scene>
+</div>
+
+↑ 上のボックスは、ドラッグで動かしたり、クリックで大きくしたりできます。
+記事を読みながら実際の挙動を確認できる。これが作りたかったブログの形です！
+
+### 数式のテスト（Client Side）
+
+数式を表示するには、`$` で囲みます。
+MDX内でバックスラッシュを使うときは、**2回重ねて (`\\`) エスケープする**点に注意してください。
+
+インライン数式: $E = mc^2$
+
+ディスプレイ数式（分数の例）:
+
+<div className="my-4 overflow-x-auto">
+{`$$
+\\frac{1}{2\\pi i} \\oint_\\gamma f(z) dz
+$$`}
+</div>
+
+### コードブロックのテスト
+
+シンタックスハイライトも効いているはずです。
+
+```tsx
+// Reactコンポーネントの例
+import { useState } from 'react'
+
+export default function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>
+}
+```
+
+</PageLayout>

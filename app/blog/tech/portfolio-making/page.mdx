@@ -1,0 +1,67 @@
+{/*
+---
+title: "ポートフォリオサイトができるまで"
+date: "2024-01-20"
+category: "Tech"
+tags: ["Next.js", "React", "WebDesign"]
+description: "Next.js + R3F + MDXで作る、3Dデモが動く技術ブログの開発ログ。技術選定の理由や実装の裏側について。"
+---
+*/}
+
+import PageLayout from '@/components/layout/PageLayout'
+import Scene from '@/components/canvas/Scene'
+import Box from '@/components/canvas/Box'
+
+<PageLayout title="ポートフォリオサイトができるまで" description="Next.js + React Three Fiber で作る、没入型ポートフォリオの開発ログ">
+
+## なぜ作ったのか？
+
+WebGPUやWebGLの研究をしていると、「ブラウザで実際に動くもの」を見せるのが一番効果的なプレゼンテーションになります。
+しかし、既存のブログサービスや静的なポートフォリオサイトでは、記事の中にインタラクティブなデモを埋め込むことが困難でした。
+
+そこで、**「記事を読む体験」と「3Dデモを触る体験」をシームレスに繋ぐ** ことを目指して、このサイトを自作することにしました。
+
+## 技術スタック
+
+今回の開発には、モダンなWeb開発のエコシステムをフル活用しています。
+
+- **Next.js (App Router)**: ベースとなるフレームワーク。
+- **React Three Fiber (R3F)**: ReactのコンポーネントとしてThree.jsを扱うためのライブラリ。
+- **Tailwind CSS**: スタイリング。
+- **MDX**: この記事のように、Markdownの中にReactコンポーネントを埋め込む技術。
+
+### 実装のポイント：MDXと3Dの融合
+
+一番のこだわりは、MDXを使って記事本文中に3Dシーンを埋め込めるようにした点です。
+例えば、開発中のシェーダーのテストを、以下のように記事内で動かすことができます。
+
+<div className="w-full h-[300px] my-8 rounded-xl overflow-hidden border border-border bg-black/50 relative shadow-2xl">
+  <Scene>
+    <Box position={[-1.2, 0, 0]} />
+    <Box position={[1.2, 0, 0]} />
+  </Scene>
+</div>
+
+このように、`<Scene>` コンポーネントをタグとして書くだけで、記事の中に3D空間が出現します。
+
+## 開発環境の構築
+
+開発にはVSCodeを使用し、AIアシスタント（CopilotやGemini）を活用して実装速度を上げました。
+特にTailwind CSSのクラス名生成や、Three.jsのボイラープレート記述において、AIは非常に強力なパートナーとなりました。
+
+```bash
+# 実際のプロジェクト作成コマンド
+npx create-next-app@latest my-portfolio
+```
+
+## 今後の展望
+
+現在は基礎的な機能の実装が終わった段階です。今後は以下の機能を追加していく予定です。
+
+1. **WebGPU対応**: 現在はWebGLのみですが、WebGPUパイプラインの実装も記事化したい。
+2. **シェーダーエディタ**: ブラウザ上でGLSLを書いて即反映できるPlayground機能。
+3. **Lighthouseスコアの改善**: 3Dコンテンツを含みつつも、高速にロードされるように最適化を進める。
+
+このサイト自体が、私の技術力の証明であり、実験場でもあります。
+
+</PageLayout>

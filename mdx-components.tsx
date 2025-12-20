@@ -9,18 +9,30 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </h1>
     ),
+    // h2: ({ children }) => (
+    //   <h2 className="text-2xl md:text-3xl font-bold mt-10 mb-5 text-white flex items-center">
+    //     <span className="w-1.5 h-6 bg-primary mr-3 rounded-sm"></span>
+    //     {children}
+    //   </h2>
+    // ),
     h2: ({ children }) => (
-      <h2 className="text-2xl md:text-3xl font-bold mt-10 mb-5 text-white flex items-center">
-        <span className="w-1.5 h-6 bg-primary mr-3 rounded-sm"></span>
+      <h2 className="text-2xl md:text-3xl font-bold mt-16 mb-8 text-white flex items-center">
+        {/* 縦バー: w-2 (8px), h-8 (32px) */}
+        <span className="w-2 h-8 bg-white mr-4 rounded-sm flex-shrink-0"></span>
         {children}
       </h2>
     ),
+    // h3: ({ children }) => (
+    //   <h3 className="text-xl md:text-2xl font-bold mt-8 mb-4 text-gray-200">
+    //     {children}
+    //   </h3>
+    // ),
     h3: ({ children }) => (
-      <h3 className="text-xl md:text-2xl font-bold mt-8 mb-4 text-gray-200">
+      <h3 className="text-xl md:text-2xl font-bold mt-10 mb-4 text-white">
         {children}
       </h3>
     ),
-    
+
     // 本文テキスト
     p: ({ children }) => (
       <p className="leading-8 text-gray-300 mb-6 text-base md:text-lg">

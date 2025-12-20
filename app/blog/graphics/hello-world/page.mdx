@@ -11,8 +11,14 @@ description: "MDXを使った最初のテスト投稿です。Markdownの中にR
 import PageLayout from '@/components/layout/PageLayout'
 import Scene from '@/components/canvas/Scene'
 import Box from '@/components/canvas/Box'
+import BlogNavigation from '@/components/blog/BlogNavigation'
 
-<PageLayout title="Hello WebGL World" description="MDXを使った最初のテスト投稿です">
+<PageLayout 
+  title="Hello WebGL World" 
+  description="MDXを使った最初のテスト投稿です"
+  tags={["WebGL", "Three.js"]}
+  tagBasePath="/blog"
+>
 
 ## MDXのパワーを体験する
 
@@ -61,5 +67,7 @@ export default function Counter() {
   return <button onClick={() => setCount(c => c + 1)}>{count}</button>
 }
 ```
+
+<BlogNavigation currentSlug="portfolio-making" />
 
 </PageLayout>

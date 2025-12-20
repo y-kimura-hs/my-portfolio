@@ -11,7 +11,7 @@ export default function Header() {
         {/* 左側：ロゴ */}
         {/* text-xl: 文字サイズ大, font-bold: 太字 */}
         <div className="text-xl font-bold">
-          <Link href="/">MY LAB</Link>
+          <Link href="/">SnowCG Lab</Link>
         </div>
 
         {/* 右側：ナビゲーション */}

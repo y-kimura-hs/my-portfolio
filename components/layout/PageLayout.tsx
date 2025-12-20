@@ -1,28 +1,66 @@
+import Link from 'next/link'
+
 interface PageLayoutProps {
   children: React.ReactNode
   title?: string
   description?: string
+  // タグ機能用に追加
+  tags?: string[]
+  // タグをクリックした時のベースパス ('/blog' または '/works')
+  tagBasePath?: '/blog' | '/works'
 }
 
-export default function PageLayout({ children, title, description }: PageLayoutProps) {
+export default function PageLayout({ 
+  children, 
+  title, 
+  description,
+  tags,
+  tagBasePath
+}: PageLayoutProps) {
   return (
-    // 上にヘッダー分の余白(pt-24)を取り、下にも余白(pb-20)を取る
-    <div className="min-h-screen w-full pt-24 pb-20">
+    <div className="min-h-screen w-full pt-32 pb-20">
       
-      {/* コンテンツの幅を制限し、中央寄せするコンテナ */}
-      {/* max-w-4xl: 記事などが読みやすい幅 (約900px) */}
       <div className="container mx-auto px-6 max-w-4xl">
         
         {/* ページタイトルエリア */}
         {(title || description) && (
           <div className="mb-12 border-b border-border pb-8">
+            {/* タイトル */}
             {title && (
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-txt-main">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-txt-main">
                 {title}
               </h1>
             )}
+            
+            {/* タグ表示エリア (クリック可能に修正) */}
+            {tags && tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-6">
+                {tags.map((tag) => (
+                  tagBasePath ? (
+                    // リンク先がある場合 (一覧ページへのフィルタ用リンク)
+                    <Link
+                      key={tag}
+                      href={`${tagBasePath}?tag=${tag}`}
+                      className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-gray-300 hover:bg-primary/20 hover:text-primary hover:border-primary/30 transition-all duration-300"
+                    >
+                      #{tag}
+                    </Link>
+                  ) : (
+                    // リンク先がない場合 (単なる表示)
+                    <span
+                      key={tag}
+                      className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-gray-500"
+                    >
+                      #{tag}
+                    </span>
+                  )
+                ))}
+              </div>
+            )}
+
+            {/* 説明文 */}
             {description && (
-              <p className="text-lg text-txt-muted">
+              <p className="text-lg text-txt-muted leading-relaxed">
                 {description}
               </p>
             )}

@@ -8,7 +8,7 @@ export default function Footer() {
           <a href="#" className="hover:text-white">Twitter</a>
         </div>
         <p className="text-xs text-gray-500">
-          &copy; {new Date().getFullYear()} Personal CG & Research Lab.
+          &copy; {new Date().getFullYear()} SnowCG Lab.
         </p>
       </div>
     </footer>

@@ -11,8 +11,14 @@ description: "Next.js + R3F + MDXで作る、3Dデモが動く技術ブログの
 import PageLayout from '@/components/layout/PageLayout'
 import Scene from '@/components/canvas/Scene'
 import Box from '@/components/canvas/Box'
+import BlogNavigation from '@/components/blog/BlogNavigation'
 
-<PageLayout title="ポートフォリオサイトができるまで" description="Next.js + React Three Fiber で作る、没入型ポートフォリオの開発ログ">
+<PageLayout 
+  title="ポートフォリオサイトができるまで" 
+  description="Next.js + React Three Fiber で作る、没入型ポートフォリオの開発ログ"
+  tags={["Next.js", "React", "WebDesign"]}
+  tagBasePath="/blog"
+>
 
 ## なぜ作ったのか？
 
@@ -63,5 +69,7 @@ npx create-next-app@latest my-portfolio
 3. **Lighthouseスコアの改善**: 3Dコンテンツを含みつつも、高速にロードされるように最適化を進める。
 
 このサイト自体が、私の技術力の証明であり、実験場でもあります。
+
+<BlogNavigation currentSlug="portfolio-making" />
 
 </PageLayout>

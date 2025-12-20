@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 // highlight.js本体をインポート
 import hljs from 'highlight.js'
 // KaTeXの自動レンダリング機能をインポート
+
+// @ts-ignore
 import renderMathInElement from 'katex/dist/contrib/auto-render'
 
 // CSSの読み込み（ここで読み込んでおく）

@@ -97,9 +97,11 @@ export default function Particles(props: any) {
   useFrame((state) => {
     const { clock, pointer } = state
     if (mesh.current) {
-      mesh.current.material.uniforms.uTime.value = clock.getElapsedTime()
+      const material = mesh.current.material as THREE.ShaderMaterial
+
+      material.uniforms.uTime.value = clock.getElapsedTime()
       // マウス位置の更新 (lerpで滑らかに)
-      mesh.current.material.uniforms.uCursor.value.lerp(pointer, 0.1)
+      material.uniforms.uCursor.value.lerp(pointer, 0.1)
     }
   })
 
@@ -111,6 +113,7 @@ export default function Particles(props: any) {
           count={positions.length / 3}
           array={positions}
           itemSize={3}
+          args={[positions, 3]}
         />
         {/* 重要: attach="attributes-aScale" にして、シェーダーの attribute float aScale と名前を合わせる */}
         <bufferAttribute
@@ -118,6 +121,7 @@ export default function Particles(props: any) {
           count={scales.length}
           array={scales}
           itemSize={1}
+          args={[scales, 1]}
         />
       </bufferGeometry>
       

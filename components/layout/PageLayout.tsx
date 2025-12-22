@@ -18,7 +18,7 @@ export default function PageLayout({
   tagBasePath
 }: PageLayoutProps) {
   return (
-    <div className="min-h-screen w-full pt-32 pb-20">
+    <div className="min-h-screen w-full pt-24 pb-20">
       
       <div className="container mx-auto px-6 max-w-4xl">
         
@@ -41,7 +41,7 @@ export default function PageLayout({
                     <Link
                       key={tag}
                       href={`${tagBasePath}?tag=${tag}`}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-gray-300 hover:bg-primary/20 hover:text-primary hover:border-primary/30 transition-all duration-300"
+                      className="px-3 py-1 text-xs font-medium rounded-full bg-card border border-border text-txt-muted hover:bg-primary hover:text-white transition-all"
                     >
                       #{tag}
                     </Link>
@@ -49,7 +49,7 @@ export default function PageLayout({
                     // リンク先がない場合 (単なる表示)
                     <span
                       key={tag}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-gray-500"
+                      className="px-3 py-1 text-xs font-medium rounded-full bg-card border border-border text-txt-muted"
                     >
                       #{tag}
                     </span>
@@ -68,7 +68,7 @@ export default function PageLayout({
         )}
 
         {/* ページの中身 */}
-        <div className="text-txt-main leading-relaxed">
+        <div className="text-txt-foreground leading-relaxed">
           {children}
         </div>
         

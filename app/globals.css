@@ -3,27 +3,47 @@
 @tailwind utilities;
 
 :root {
-  /* ベースカラー */
-  --background: #050505;       /* ほぼ黒 */
-  --foreground: #ffffff;       /* 白 */
+  /* ライトモード: 必ず「#」から始まるカラーコードにする */
+  --background: #ffffff;
+  --foreground: #171717;
   
-  /* テキストカラー */
-  --text-main: #f3f4f6;        /* メインの文字色 (真っ白より目に優しい) */
-  --text-muted: #9ca3af;       /* 控えめな文字色 (グレー) */
+  --text-main: #111827;
+  --text-muted: #4b5563;
   
-  /* アクセントカラー (強調色) */
-  --primary: #3b82f6;          /* 強調1: 鮮やかな青 (リンクや重要なボタン) */
-  --secondary: #8b5cf6;        /* 強調2: 紫 (グラデーション用など) */
+  --primary: #2563eb;
+  --secondary: #7c3aed;
   
-  /* UIパーツ */
-  --header-bg: rgba(5, 5, 5, 0.8); /* ヘッダー背景 (少し透過) */
-  --footer-bg: #000000;            /* フッター背景 */
-  --border-color: #27272a;         /* 枠線の色 */
+  --header-bg: rgba(5, 5, 5, 0.4);
+  --footer-bg: #434e815e;
+  --border-color: #e5e7eb;
+
+    /* 追加: カードやサイドバーの背景色（ライトモードは薄いグレー） */
+  --card-bg: rgba(230, 230, 230, 0.5);
+}
+
+.dark {
+  /* ダークモード: 必ず「#」から始まるカラーコードにする */
+  --background: #050505;
+  --foreground: #ffffff;
+  
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  
+  --primary: #3b82f6;
+  --secondary: #8b5cf6;
+  
+  --header-bg: rgba(150, 150, 150, 0.4);
+  --footer-bg: #111827;
+  --border-color: #27272a;
+
+    /* 追加: カードやサイドバーの背景色（ダークモードは半透明の白） */
+  --card-bg: rgba(50, 50, 50, 0.5);
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
+  transition: background-color 0.3s, color 0.3s; /* スムーズな切り替え */
 }
 
 /* @tailwind base;

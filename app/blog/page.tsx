@@ -43,14 +43,14 @@ export default async function BlogPage({ searchParams }: Props) {
           {selectedTag && (
              <div className="mb-8">
                <div className="mb-8 flex items-center justify-between border-b border-border pb-4">
-                 <h2 className="text-2xl font-bold text-white flex items-center">
+                 <h2 className="text-2xl font-bold text-txt-main flex items-center">
                    <span className="text-primary mr-2">#</span>
                    {selectedTag}
                    <span className="ml-4 text-sm font-normal text-txt-muted">
                      ({displayPosts.length} posts)
                    </span>
                  </h2>
-                 <Link href="/blog" className="text-sm text-txt-muted hover:text-white transition-colors flex items-center gap-1">
+                 <Link href="/blog" className="text-sm text-txt-muted hover:text-primary transition-colors flex items-center gap-1">
                    <span className="text-lg">×</span> Clear filter
                  </Link>
                </div>
@@ -61,7 +61,7 @@ export default async function BlogPage({ searchParams }: Props) {
                      <PostCard key={post.slug} post={post} />
                    ))
                  ) : (
-                   <div className="col-span-2 text-center py-12 text-gray-500">
+                   <div className="col-span-2 text-center py-12 text-txt-muted">
                      No posts found with tag &quot;{selectedTag}&quot;.
                    </div>
                  )}
@@ -82,7 +82,7 @@ export default async function BlogPage({ searchParams }: Props) {
               )}
 
               <section>
-                 <h2 className="text-xl font-bold mb-8 text-white border-b border-border pb-2">
+                 <h2 className="text-xl font-bold mb-8 text-txt-main border-b border-border pb-2">
                    Category Archives
                  </h2>
                  
@@ -134,8 +134,8 @@ function PostCard({ post, isFeatured = false }: { post: PostMetadata, isFeatured
         className={`
           h-full p-6 rounded-lg border border-border transition-all duration-300 relative overflow-hidden
           ${isFeatured 
-            ? 'bg-gradient-to-br from-white/10 to-white/5 border-primary/30 hover:border-primary/60' 
-            : 'bg-white/5 hover:bg-white/10 hover:translate-y-[-2px]'
+            ? 'bg-card hover:bg-white border-primary/30 hover:border-primary/50' 
+            : 'bg-card hover:bg-white hover:border-primary/50 hover:translate-y-[-2px]'
           }
         `}
       >
@@ -143,7 +143,7 @@ function PostCard({ post, isFeatured = false }: { post: PostMetadata, isFeatured
           <time dateTime={post.date}>{post.date.replace(/-/g, '.')}</time>
           <span className={`
             px-2 py-0.5 rounded text-xs border
-            ${isFeatured ? 'bg-primary/20 text-primary border-primary/20' : 'bg-gray-800 text-gray-300 border-gray-700'}
+            ${isFeatured ? 'bg-primary/20 text-primary border-primary/20' : 'bg-card text-txt-muted border-border'}
           `}>
             {post.category}
           </span>
@@ -153,7 +153,7 @@ function PostCard({ post, isFeatured = false }: { post: PostMetadata, isFeatured
           {post.title}
         </h2>
         
-        <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed mb-3 relative z-10">
+        <p className="text-txt-muted text-sm line-clamp-2 leading-relaxed mb-3 relative z-10">
           {post.description}
         </p>
 
@@ -163,7 +163,7 @@ function PostCard({ post, isFeatured = false }: { post: PostMetadata, isFeatured
               <object key={tag} type="invalid/type">
                 <Link 
                   href={`/blog?tag=${tag}`}
-                  className="text-xs text-gray-500 hover:text-primary hover:underline transition-colors mr-2"
+                  className="text-xs text-txt-muted hover:text-primary hover:underline transition-colors mr-2"
                 >
                   #{tag}
                 </Link>

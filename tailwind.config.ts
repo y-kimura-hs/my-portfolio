@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: 'class',
+
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -26,6 +28,8 @@ const config: Config = {
         header: 'var(--header-bg)',
         footer: 'var(--footer-bg)',
         border: 'var(--border-color)',
+
+        card: 'var(--card-bg)',
       },
     },
   },

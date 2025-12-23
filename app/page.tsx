@@ -2,6 +2,7 @@ import Scene from '@/components/canvas/Scene'
 import Particles from '@/components/canvas/Particles'
 import Box from '@/components/canvas/Box'
 import Link from 'next/link'
+import Logo from '@/components/dom/Logo'
 
 export default function Home() {
   return (
@@ -18,12 +19,17 @@ export default function Home() {
 
       {/* --- 前景レイヤー: 文字コンテンツ --- */}
       <div className="relative z-10 w-full h-full flex flex-col justify-center items-center pointer-events-none px-4">
-        
-        <div className="container mx-auto max-w-4xl text-center">
+        <div className="container mx-auto max-w-4xl text-center flex flex-col items-center">
+
+          {/* 中央ロゴ: w-32 h-32 (128px) 程度に大きく設定 */}
+          <div className="w-48 h-48 md:w-80 md:h-80 mb-16 text-foreground drop-shadow-2xl">
+            <Logo />
+          </div>
+
           {/* メインタイトル */}
-          <h1 className="text-6xl md:text-9xl font-extrabold tracking-tighter mb-8 text-transparent bg-clip-text bg-gradient-to-b from-foreground to-gray-500 drop-shadow-2xl">
+          {/* <h1 className="text-6xl md:text-9xl font-extrabold tracking-tighter mb-8 text-transparent bg-clip-text bg-gradient-to-b from-foreground to-gray-500 drop-shadow-2xl">
             SnowCG Lab
-          </h1>
+          </h1> */}
           
           <p className="text-xl md:text-2xl text-txt-muted font-light tracking-wide max-w-2xl mx-auto mb-12 drop-shadow-md leading-relaxed">
             こんにちは，世界！

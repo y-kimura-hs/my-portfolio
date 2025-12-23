@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import ThemeToggle from '@/components/dom/ThemeToggle'
+import Logo from '@/components/dom/Logo'
 
 export default function Header() {
   return (
@@ -11,8 +12,18 @@ export default function Header() {
         
         {/* 左側：ロゴ */}
         {/* text-xl: 文字サイズ大, font-bold: 太字 */}
-        <div className="text-xl font-bold">
-          <Link href="/" className="text-white hover:text-primary transition-colors">SnowCG Lab</Link>
+        <div className="flex items-center mr-8">
+          <Link href="/" className="flex items-center gap-3 text-txt-main hover:text-primary transition-colors group">
+            {/* ロゴ配置: w-8 h-8 (32px) 程度に設定 */}
+            <div className="w-8 h-8 text-txt-main transition-colors">
+              <Logo />
+            </div>
+            
+            {/* タイトル */}
+            <span className="text-xl font-bold">
+              SnowCG
+            </span>
+          </Link>
         </div>
 
         {/* 右側：ナビゲーション */}

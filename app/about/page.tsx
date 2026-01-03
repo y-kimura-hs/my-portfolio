@@ -105,16 +105,17 @@ export default function AboutPage() {
       {/* 4. Skills & Environment */}
       <section className="mb-16">
         <SectionTitle>Technical Skills</SectionTitle>
-          <li>C++：メインで使っています．</li>
-          <li>CUDA：たまに使っています．</li>
-          <li>Python：インターンで使っています．特に勉強した記憶はない．</li>
-          <li>Visual Studio：普段はWindows環境で開発しています．</li>
-          <li>VSCode：UbuntuやWeb実装で使用しています．</li>
-          <li>OpenGL：研究室で使用しています．</li>
-          <li>VulkanL：勉強中！</li>
-          <li>WebGL：勉強中！</li>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <ul className="list-disc list-inside space-y-2 text-foreground">
+            <li>C++：メインで使っています．</li>
+            <li>CUDA：たまに使っています．</li>
+            <li>Python：インターンで使っています．特に勉強した記憶はない．</li>
+            <li>Visual Studio：普段はWindows環境で開発しています．</li>
+            <li>VSCode：UbuntuやWeb実装で使用しています．</li>
+            <li>OpenGL：研究室で使用しています．</li>
+            <li>VulkanL：勉強中！</li>
+            <li>WebGL：勉強中！</li>
+          </ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* <SkillCard title="Languages">
             C++, Python, TypeScript, GLSL, WGSL, Rust (Learning)
           </SkillCard>

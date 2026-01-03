@@ -18,7 +18,7 @@ export default function AboutPage() {
         
         <div className="text-center md:text-left">
           <h2 className="text-3xl font-bold text-txt-main mb-2">
-            Rinko
+            rinko
           </h2>
           <p className="text-primary font-medium mb-4">
             学生
@@ -137,8 +137,8 @@ export default function AboutPage() {
           <h3 className="text-xl font-bold mb-4 text-txt-main">音楽</h3>
           <ul className="list-disc list-inside space-y-2 text-foreground">
               <li>なんだかんだでBUMP OF CHICENが一番好き</li>
-              <li>最近ライブに行ったバンド：BUMP OF CHICKEN, OASIS，星野源，SEKAI NO OWARI</li>
-              <li>よく聴く：Foo Fighters, Toto, フジファブリック，andymori, リーガルリリー...</li>
+              {/* <li>最近ライブに行ったバンド：BUMP OF CHICKEN, OASIS，星野源，SEKAI NO OWARI</li>
+              <li>よく聴く：Foo Fighters, Toto, フジファブリック，andymori, リーガルリリー...</li> */}
               <li>一番好きなギタリスト：ラリー・カールトン（ギターの神様）</li>
             </ul>
         </div>

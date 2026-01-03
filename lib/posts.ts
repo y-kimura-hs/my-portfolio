@@ -13,6 +13,7 @@ export type PostMetadata = {
   tags?: string[]
   description: string
   urlCategory: string
+  published?: boolean // 追加
 }
 
 // 再帰的にディレクトリを探索してMDXファイルを探す関数
@@ -62,6 +63,11 @@ export function getAllPosts(): PostMetadata[] {
       data = { title: `(Metadata Error) ${path.basename(path.dirname(filePath))}` }
     }
 
+    // ★追加: published: false が指定されていたら null を返して除外対象にする
+    if (data.published === false) {
+      return null
+    }
+
     // パスからスラッグとカテゴリを取得
     const parentDir = path.basename(path.dirname(filePath))
     const grandParentDir = path.basename(path.dirname(path.dirname(filePath)))
@@ -79,8 +85,10 @@ export function getAllPosts(): PostMetadata[] {
       category: (data.category || folderCategory || 'Tech') as any,
       tags: data.tags || [],
       description: data.description || '',
+      published: data.published ?? true,
     } as PostMetadata
   })
+  .filter((post): post is PostMetadata => post !== null)
 
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }

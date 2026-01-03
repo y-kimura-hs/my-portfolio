@@ -12,7 +12,7 @@ import { ThemeProvider } from '@/components/theme/ThemeProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'SnowCG Lab',
+  title: 'Nyambush',
   description: 'Portfolio & Tech Blog',
 }
 

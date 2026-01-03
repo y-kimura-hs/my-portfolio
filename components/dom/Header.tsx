@@ -1,10 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import { useState, useEffect, useRef } from 'react'
 import ThemeToggle from '@/components/dom/ThemeToggle'
 import Logo from '@/components/dom/Logo'
-import { useState, useEffect, useRef } from 'react'
-
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true)
@@ -14,27 +13,18 @@ export default function Header() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       
-      // スクロール判定ロジック
-      // 1. 上にスクロールした (current < last)
-      // 2. または、ページの最上部付近にいる (current < 50)
-      // -> 表示する (isVisible = true)
       if (currentScrollY < lastScrollY.current || currentScrollY < 50) {
         setIsVisible(true)
       } 
-      // 3. 下にスクロールした かつ 最上部ではない
-      // -> 隠す (isVisible = false)
       else if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
         setIsVisible(false)
       }
 
-      // 現在位置を保存
       lastScrollY.current = currentScrollY
     }
 
-    // イベントリスナー登録
     window.addEventListener('scroll', handleScroll, { passive: true })
     
-    // クリーンアップ
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -47,24 +37,31 @@ export default function Header() {
         ${isVisible ? 'translate-y-0' : '-translate-y-full'}
       `}
     >
-      <div className="container mx-auto px-4 h-16 flex justify-between items-center">
+      {/* justify-between で左右に配置を振り分けます */}
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         
         {/* ロゴ + タイトルエリア */}
-        <div className="flex items-center mr-8">
+        <div className="flex items-center">
           <Link href="/" className="flex items-center gap-3 text-txt-main hover:text-primary transition-colors group">
             <div className="w-8 h-8 text-txt-main group-hover:text-primary transition-colors">
               <Logo />
             </div>
-            <span className="text-xl font-bold">
+            
+            {/* ここがポイント！ */}
+            {/* hidden: デフォルト（スマホ）で非表示 */}
+            {/* md:block: 画面幅768px以上（PC/タブレット）で表示 */}
+            <span className="text-xl font-bold hidden md:block">
               SnowCG
             </span>
           </Link>
         </div>
 
         {/* ナビゲーション + トグルボタン */}
-        <div className="flex items-center gap-6">
+        {/* スマホでは間隔を少し狭く (gap-4)、PCでは広く (md:gap-6) */}
+        <div className="flex items-center gap-4 md:gap-6">
           <nav>
-            <ul className="flex gap-6 text-sm font-medium text-txt-muted">
+            {/* 文字サイズもスマホでは小さく (text-xs)、PCでは標準 (md:text-sm) */}
+            <ul className="flex gap-4 md:gap-6 text-xs md:text-sm font-medium text-txt-muted">
               <li><Link href="/about" className="hover:text-primary transition-colors">ABOUT</Link></li>
               <li><Link href="/works" className="hover:text-primary transition-colors">WORKS</Link></li>
               <li><Link href="/blog" className="hover:text-primary transition-colors">BLOG</Link></li>

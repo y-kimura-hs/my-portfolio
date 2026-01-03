@@ -32,7 +32,7 @@ export default async function WorksPage({ searchParams }: Props) {
   return (
     <PageLayout 
       title="Works" 
-      description="これまでに制作したCG作品や、実験的なデモのコレクション。"
+      description="制作したCG作品やデモのコレクション"
     >
       <div className="flex flex-col lg:flex-row gap-12">
         

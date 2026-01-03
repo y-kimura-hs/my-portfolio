@@ -4,85 +4,90 @@ title: "Realtime Stable Fluids"
 date: "2023-12-10"
 year: "2023"
 category: "Simulation"
-tags: ["WebGL", "Physics", "GLSL"]
-description: "WebGL 2.0を用いたリアルタイム流体シミュレーション。Navier-Stokes方程式をGPU上で解き、煙のような挙動を再現しています。"
+tags: ["WebGL", "Physics", "Fluids"]
+description: "WebGLを用いたリアルタイム流体シミュレーション"
 color: "from-blue-600 to-cyan-400"
 ---
 */}
 
 import PageLayout from '@/components/layout/PageLayout'
-import ViewCanvas from '@/components/canvas/ViewCanvas'
+import ViewCanvas2D from '@/components/canvas/ViewCanvas2D'
 import Box from '@/components/canvas/Box'
 import Particles from '@/components/canvas/Particles'
 import Link from 'next/link'
 import WorkNavigation from '@/components/works/WorkNavigation'
+import FluidSimulation from '@/components/canvas/fluids/simulation'
 
 <PageLayout 
   title="Realtime Stable Fluids" 
-  description="WebGL 2.0 / GLSL / Physics Simulation"
-  tags={["WebGL", "Physics", "GLSL"]}
+  description="WebGLを用いたリアルタイム流体シミュレーション"
+  tags={["WebGL", "Physics", "Fluids"]}
   tagBasePath="/works"
 >
 
 {/* --- デモセクション --- */}
-<ViewCanvas>
-  <Particles />
-  <Box position={[0, 0, 0]} />
-</ViewCanvas>
+<ViewCanvas2D>
+  <FluidSimulation />
+</ViewCanvas2D>
 
 
 {/* --- 解説セクション --- */}
-<div className="grid grid-cols-1 lg:grid-cols-[1fr_250px] gap-12 mt-12">
+<div className="mt-12">
   
   <article>
     ## プロジェクト概要
-    
-    Jos Stam氏が1999年に発表した "Stable Fluids" アルゴリズムを、WebGL 2.0 (GPGPU) を用いてブラウザ上に実装しました。
-    ナビエ・ストークス方程式を構成する「移流」「拡散」「外力」「圧力計算（発散除去）」の各項を、フラグメントシェーダーによるピングポンレンダリングで解いています。
 
-    ### 技術的なポイント
-    
-    1. **Jacobi法による圧力計算**: 
-       圧力場のポアソン方程式を解くために、反復法であるJacobi法を採用。フラグメントシェーダーで数十回反復させることで、非圧縮性流体の挙動を近似しています。
-    
-    2. **MacCormack法による移流**:
-       単純なセミラグランジュ法では数値拡散によりディテールが失われやすいため、MacCormack法を導入して渦のディテールを維持しています。
+    試作として，有名なStable FluidsのデモをWebGLで実装してみました．
+    非圧縮性ナビエ・ストークス方程式を数値的に安定して解くことで，リアルタイムに煙のような流体の挙動をシミュレートします．
+    マウス操作により煙を流入できます．
 
-    ### 実装コード（抜粋）
+    ### 実装したソルバの流れ
+
+    シミュレーションは以下のステップで実行されます．
+    各ステップはフラグメントシェーダーとして実装され，FBO（Frame Buffer Object）を介してデータを受け渡します．
+
+    1. **Advection (移流)**: 
+      セミラグランジュ法で計算します．
+      現在の速度場に従って過去の位置をバックトレースし，物理量（速度・密度）を移動させます．
+      とても安定しますが，数値拡散によりディテールが失われやすいです．
     
-    移流項のシェーダーコードです。
+    2. **External Forces (外力)**:
+      マウス入力による力，重力に加え，数値拡散を補うための **Vorticity Confinement (渦度閉じ込め)** を適用します
+      （閉じ込めって，なんかダサい和訳だよねっていつも思う）．
+      これにより，乱流のような細かい渦の動きを維持します．
+    
+    3. **Projection (射影)**:
+       速度場から発散成分を取り除き，非圧縮性を満たすように補正します．
+       - **Divergence**: 速度場の発散を計算．
+       - **Pressure Solve**: 圧力場のポアソン方程式を，ヤコビ法 (Jacobi Iteration) を用いて反復計算で解きます．
+       - **Gradient Subtract**: 計算された圧力勾配を元の速度場から減算し，Divergence-freeな速度場を得ます．
 
-    ```glsl
-    uniform sampler2D velocity;
-    uniform sampler2D source;
-    uniform float dt;
+    ### 参考文献
 
-    void main() {
-        vec2 coord = gl_FragCoord.xy;
-        // 速度場に従ってバックトレース
-        vec2 pos = coord - dt * texture(velocity, uv).xy;
-        // 補間して値をサンプリング
-        gl_FragColor = texture(source, pos / resolution);
-    }
-    ```
+    - **Stable Fluids**
+      - Jos Stam, "Stable Fluids", SIGGRAPH 99, 1999.
+      - [PDF Link](https://pages.cs.wisc.edu/~chaol/data/cs777/stam-stable_fluids.pdf)
+    - **Vorticity Confinement**
+      - Ronald Fedkiw, Jos Stam, and Henrik Wann Jensen, "Visual Simulation of Smoke", SIGGRAPH 2001.
+      - [PDF Link](https://web.stanford.edu/class/cs237d/smoke.pdf)
+
   </article>
 
-  <aside className="space-y-8">
+  {/* <aside className="space-y-8">
     <div className="bg-card p-6 rounded-xl border border-border">
-      <h3 className="font-bold text-txt-muted mb-4">Tech Stack</h3>
+      <h3 className="font-bold text-txt-main mb-4">Tech Stack</h3>
       <ul className="space-y-2 text-sm text-txt-muted">
         <li className="flex items-center"><span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>Three.js</li>
-        <li className="flex items-center"><span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>GLSL</li>
+        <li className="flex items-center"><span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>GLSL (Fragment Shader)</li>
         <li className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>React Three Fiber</li>
       </ul>
     </div>
     
     <div className="bg-card p-6 rounded-xl border border-border">
-      <h3 className="font-bold text-txt-muted mb-4">Links</h3>
+      <h3 className="font-bold text-txt-main mb-4">Links</h3>
       <a href="#" className="block text-primary hover:underline text-sm mb-2">View on GitHub ↗</a>
-      <a href="#" className="block text-primary hover:underline text-sm">Paper Reference ↗</a>
     </div>
-  </aside>
+  </aside> */}
 
 </div>
 
